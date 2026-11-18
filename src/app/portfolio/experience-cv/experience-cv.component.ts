@@ -3,7 +3,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid'
 import { NzCardModule } from 'ng-zorro-antd/card'
 import { NzCollapseModule } from 'ng-zorro-antd/collapse'
 import { NzIconDirective } from 'ng-zorro-antd/icon'
-import { PdfViewerModule } from 'ng2-pdf-viewer'
 import { NzButtonModule } from 'ng-zorro-antd/button'
 
 @Component({
@@ -14,7 +13,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button'
 		NzCardModule,
 		NzCollapseModule,
 		NzIconDirective,
-		PdfViewerModule,
 		NzButtonModule,
 	],
 	templateUrl: './experience-cv.component.html',

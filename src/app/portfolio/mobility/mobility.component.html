@@ -1,80 +1,71 @@
 <h2 style="text-align: center">Mobility confirmation:</h2>
 <p style="padding-left: 20vw; padding-right: 20vw; margin-bottom: 5vh">
-	Due to some confidential data, some information has been redacted. Here is the translated
-	version of the mobility confirmation.
+  Due to some confidential data, some information has been redacted. Here is the translated
+  version of the mobility confirmation.
 
-	<br />
-	<br />
+  <br />
+  <br />
 
-	Hello Ophélie, Zachary, Thank you for your email. Concerning the international internship, your
-	school will accompany you in the necessary steps, the company doesn't have to do anything,
-	besides sign the contract that will be established. We were never able to send a student to an
-	internship at an international site at Collins, mostly due too expensive price for the location,
-	and not corresponding need. You can ask [...] qui went this year, so that she can share her
-	experience. Fro man administrative view point, during your internship, your contract is
-	suspended. We send a "bonus", during the month of departure, equivalent to the salary that you
-	should've received during the months that you aren't present. I am at your disposition to
-	discuss it more. Thank you.
+  Hello Ophélie, Zachary, Thank you for your email. Concerning the international internship, your
+  school will accompany you in the necessary steps, the company doesn't have to do anything,
+  besides sign the contract that will be established. We were never able to send a student to an
+  internship at an international site at Collins, mostly due too expensive price for the location,
+  and not corresponding need. You can ask [...] who went this year, so that she can share her
+  experience. From an administrative view point, during your internship, your contract is
+  suspended. We send a "bonus", during the month of departure, equivalent to the salary that you
+  should've received during the months that you aren't present. I am at your disposition to
+  discuss it more. Thank you.
 </p>
 
 @for (row of chunkedProjects; track row) {
-	<nz-row [nzGutter]="[24, 24]">
-		@for (project of row; track project) {
-			<nz-col nzSpan="6" nzOffset="2" style="text-align: center; margin-bottom: 15px">
-				<img
-					[src]="'assets/images/flags/Flag_of_' + project.country + '.svg'"
-					[alt]="'Flag of project.country'"
-					class="image"
-					(click)="showModal(project.id)" />
-				<br />
-				{{ project.title }}
-				<ng-container
-					*ngTemplateOutlet="
+<nz-row [nzGutter]="[24, 24]">
+  @for (project of row; track project) {
+  <nz-col nzSpan="6" nzOffset="2" style="text-align: center; margin-bottom: 15px">
+    <img [src]="'assets/images/flags/Flag_of_' + project.country + '.svg'" [alt]="'Flag of ' + project.country"
+      class="image" (click)="showModal(project.id)" />
+    <br />
+    {{ project.title }}
+    <ng-container *ngTemplateOutlet="
 						mobilityProjectTemplate;
 						context: {
 							projectId: project.id,
 							title: project.title,
 							content: project.description,
 							duration: project.duration,
+							partnership: project.partnership,
 							location: project.location,
 							country: project.country,
 							type: project.type,
 						}
 					">
-				</ng-container>
-			</nz-col>
-		}
-	</nz-row>
+    </ng-container>
+  </nz-col>
+  }
+</nz-row>
 }
 
-<ng-template
-	#mobilityProjectTemplate
-	let-projectId="projectId"
-	let-title="title"
-	let-content="content"
-	let-duration="duration"
-	let-location="location"
-	let-country="country"
-	let-type="type">
-	<nz-modal
-		[(nzVisible)]="isVisible[projectId]"
-		[nzTitle]="title"
-		(nzOnCancel)="closeModal(projectId)"
-		(nzOnOk)="closeModal(projectId)">
-		<ng-container *nzModalContent>
-			<h3>{{ country }} - {{ location }}</h3>
-			<br />
-			<p style="text-align: justify">
-				{{ content }}
-			</p>
-			<ul>
-				<li>
-					<b>Type: </b> <i>{{ type }}</i>
-				</li>
-				<li>
-					<b>Duration: </b> <i>{{ duration }}</i>
-				</li>
-			</ul>
-		</ng-container>
-	</nz-modal>
+<ng-template #mobilityProjectTemplate let-projectId="projectId" let-title="title" let-content="content"
+  let-duration="duration" let-location="location" let-partnership="partnership" let-country="country" let-type="type">
+  <nz-modal [(nzVisible)]="isVisible[projectId]" [nzTitle]="title" (nzOnCancel)="closeModal(projectId)"
+    (nzOnOk)="closeModal(projectId)">
+    <ng-container *nzModalContent>
+      <h3>{{ country }} - {{ location }}</h3>
+      <br />
+      <p style="text-align: justify">
+        {{ content }}
+      </p>
+      <ul>
+        <li>
+          <b>Type: </b> <i>{{ type }}</i>
+        </li>
+        <li>
+          <b>Duration: </b> <i>{{ duration }}</i>
+        </li>
+      </ul>
+      Partnership status:
+      <nz-tag [nzColor]="getBadgeColor(partnership)">
+        {{ partnership }}
+      </nz-tag>
+    </ng-container>
+  </nz-modal>
 </ng-template>

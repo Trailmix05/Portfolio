@@ -5,7 +5,7 @@
 				><a routerLink=""><i nz-icon nzType="home" nzTheme="fill" class="icon"></i>Home</a>
 			</nz-row>
 		</nz-col>
-		<nz-col nzSpan="11">&nbsp;</nz-col>
+		<nz-col nzSpan="9">&nbsp;</nz-col>
 		<nz-col nzSpan="2">
 			<nz-row nzJustify="center"
 				><a routerLink="/projects"
@@ -35,22 +35,12 @@
 				></nz-row
 			>
 		</nz-col>
-		<!-- 
-        <nz-col nzSpan="2">
-			<nz-row nzJustify="center">
-				<a nz-dropdown [nzDropdownMenu]="languageDropdown">
-					Languages
-					<i nz-icon nzType="right" class="arrow-icon"></i>
-				</a>
-			</nz-row>
+		<nz-col nzSpan="2">
+			<nz-row nzJustify="center"
+				><a routerLink="/cep"
+					><i nz-icon nzType="folder-open" nzTheme="fill" class="icon"></i>CEP</a
+				></nz-row
+			>
 		</nz-col>
-        -->
 	</nz-row>
 </header>
-
-<nz-dropdown-menu #languageDropdown="nzDropdownMenu">
-	<ul nz-menu nzSelectable>
-		<li nz-menu-item>English</li>
-		<li nz-menu-item>French</li>
-	</ul>
-</nz-dropdown-menu>
