@@ -28,7 +28,7 @@
     <ng-container *ngTemplateOutlet="
 						mobilityProjectTemplate;
 						context: {
-							projectId: project.id,
+						projectId: project.id,
 							title: project.title,
 							content: project.description,
 							duration: project.duration,
@@ -66,6 +66,22 @@
       <nz-tag [nzColor]="getBadgeColor(partnership)">
         {{ partnership }}
       </nz-tag>
+      <nz-row>
+        <nz-col style="display: flex; flex-direction: column; gap: 12px;">
+          <a [href]="'assets/pdf/zachary-ivars-' + country.toLowerCase() + '-coverletter.pdf'"
+             target="_blank"
+             rel="noopener"
+             style="margin-top: 16px;">
+            <button nz-button nzType="primary" style="color: #fcfcce">Cover letter</button>
+          </a>
+
+          <a [href]="getCvUrl(country)"
+             target="_blank"
+             rel="noopener">
+            <button nz-button nzType="primary" style="color: #fcfcce">CV v.{{ country }}</button>
+          </a>
+        </nz-col>
+      </nz-row>
     </ng-container>
   </nz-modal>
 </ng-template>

@@ -3,12 +3,14 @@ import { NzGridModule } from 'ng-zorro-antd/grid'
 import { NzModalModule } from 'ng-zorro-antd/modal'
 import { NzTagModule } from 'ng-zorro-antd/tag'
 import { NgTemplateOutlet } from '@angular/common'
+import { NzButtonModule } from 'ng-zorro-antd/button'
 
 export type partnership = 'existing' | 'waiting for a response' | 'nonexisting'
 
 interface MobilityProject {
   id?: number
   title: string
+  link?: string
   location: string
   country: string
   duration: string
@@ -20,15 +22,17 @@ interface MobilityProject {
 @Component({
   selector: 'app-mobility',
   standalone: true,
-  imports: [NzModalModule, NgTemplateOutlet, NzGridModule, NzTagModule],
+  imports: [NzModalModule, NgTemplateOutlet, NzGridModule, NzTagModule, NzButtonModule],
   templateUrl: './mobility.component.html',
   styleUrls: ['./mobility.component.less', '../../app.component.less'],
 })
 export class MobilityComponent {
+  availableCvs = ['finland']
   isVisible: boolean[] = []
   projects: MobilityProject[] = [
     {
       title: 'Aalto University',
+      link: 'https://www.aalto.fi/en/department-of-computer-science/education#2-master-s-programmes',
       location: 'Aalto',
       country: 'Finland',
       duration: '1 Semester',
@@ -39,6 +43,7 @@ export class MobilityComponent {
     },
     {
       title: '"Tor Vergata" University',
+      link: 'https://web.uniroma2.it/en/contenuto/computer_science-93169',
       location: 'Rome',
       country: 'Italy',
       duration: '1 Semester',
@@ -49,6 +54,7 @@ export class MobilityComponent {
     },
     {
       title: 'Technical University of Darmstadt',
+      link: 'https://www.informatik.tu-darmstadt.de/fb20/index.en.jsp',
       location: 'Darmstadt',
       country: 'Germany',
       duration: '1 Semester',
@@ -59,6 +65,7 @@ export class MobilityComponent {
     },
     {
       title: 'University of Stavanger',
+      link: '',
       location: 'Stavanger',
       country: 'Norway',
       duration: '1 Semester',
@@ -69,6 +76,7 @@ export class MobilityComponent {
     },
     {
       title: 'Delft University',
+      link: '',
       location: 'Delft',
       country: 'Netherlands',
       duration: '1 Semester',
@@ -94,7 +102,6 @@ export class MobilityComponent {
     const chunks = []
     for (let i = 0; i < this.projects.length; i += chunkSize)
       chunks.push(this.projects.slice(i, i + chunkSize))
-
     return chunks
   }
 
@@ -120,5 +127,15 @@ export class MobilityComponent {
       default:
         return 'default' // Renders a clean grey pill
     }
+  }
+  getCvUrl(country: string): string {
+    const lowerCountry = country.toLowerCase();
+
+    if (this.availableCvs.includes(lowerCountry)) {
+      return `assets/pdf/zachary-ivars-${lowerCountry}-CV.pdf`;
+    }
+
+    // Fallback path if no country-specific CV exists
+    return 'assets/pdf/CV_Zachary_Ivars_English.pdf';
   }
 }
